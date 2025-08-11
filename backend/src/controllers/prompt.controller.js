@@ -83,16 +83,21 @@ async function deletePrompt(req, res) {
     user: req.user.id,
   });
 
-  if(!deleted){
+  if (!deleted) {
     return res.status(404).json({
-      message:"Prompt not found"
-    })
+      message: "Prompt not found",
+    });
   }
 
   res.json({
-    message:"Your selected prompt is deleted successfully!"
-  })
+    message: "Your selected prompt is deleted successfully!",
+  });
 }
 
-
-module.exports = { createPrompt, getMyPrompts, getPromptById, updatedPrompt,deletePrompt};
+module.exports = {
+  createPrompt,
+  getMyPrompts,
+  getPromptById,
+  updatedPrompt,
+  deletePrompt,
+};
