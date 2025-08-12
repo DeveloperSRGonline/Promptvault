@@ -32,7 +32,6 @@ async function registerController(req, res) {
     message: "user registered successfully",
   });
 }
-
 async function loginController(req, res) {
   const { email, password } = req.body;
 
@@ -58,16 +57,25 @@ async function loginController(req, res) {
   }
 
   const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
-  res.cookie('token',token)
+  res.cookie("token", token);
 
   res.json({
-    message:'User logged in successfully!',
-    user:{
-        id:user._id,
-        username:user.username,
-        email:user.email
-    }
-  })
+    message: "User logged in successfully!",
+    user: {
+      id: user._id,
+      username: user.username,
+      email: user.email,
+    },
+  });
+}
+function getMe(req, res) {
+  if (!req.user) {
+    return res.status(401).json({ message: "Not logged in" });
+  }
+  res.json(req.user);
+}
+function logoutUser(req, res) {
+  res.clearCookie("token").json({ message: "Logged out" });
 }
 
-module.exports = { registerController, loginController };
+module.exports = { registerController, loginController, getMe, logoutUser };

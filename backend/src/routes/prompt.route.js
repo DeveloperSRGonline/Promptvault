@@ -6,7 +6,7 @@ const router = express.Router();
 router.use(authMiddleware)
 
 router.post('/', createPrompt);
-router.get('/', getMyPrompts);
+router.get('/my-prompts', getMyPrompts);
 router.get('/:id', getPromptById);
 router.patch('/:id', updatedPrompt);
 router.delete('/:id', deletePrompt);

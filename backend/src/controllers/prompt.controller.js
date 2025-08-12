@@ -22,15 +22,19 @@ async function createPrompt(req, res) {
 
 // Get all the prompts
 async function getMyPrompts(req, res) {
-  console.log(req.user.id);
-  const prompts = await promptModel.find({
-    user: req.user.id,
-  });
+  try {
+    console.log(req.user.id);
+    const prompts = await promptModel.find({
+      
+    });
 
-  res.status(500).json({
-    message: "Here are your prompts",
-    prompts: prompts,
-  });
+    return res.status(200).json({
+      prompts: prompts,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Failed to fetch prompts" });
+  }
 }
 
 // Get single prompt by ID
