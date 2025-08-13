@@ -25,7 +25,7 @@ async function getMyPrompts(req, res) {
   try {
     console.log(req.user.id);
     const prompts = await promptModel.find({
-      
+      user: req.user.id,
     });
 
     return res.status(200).json({
